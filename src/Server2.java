@@ -75,7 +75,7 @@ public class Server2 {
     }
 
     public static void main(String[] args) {
-        int port = 1233;
+        int port = 1000;
         Server2 server = new Server2();
         server.start(port);
     }

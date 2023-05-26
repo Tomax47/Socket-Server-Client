@@ -19,7 +19,7 @@ public class serverMain {
         ServerSocket serverSocket = null;
 
         try {
-            serverSocket = new ServerSocket(1234);
+            serverSocket = new ServerSocket(1222);
 
             while (true) {
                 try {

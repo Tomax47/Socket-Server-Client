@@ -4,21 +4,27 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Client2 {
+public class Client4 {
     private Socket socket;
     private BufferedReader bufferedReader;
     private InputStreamReader inputStreamReader;
     private PrintWriter printWriter;
 
-    public void start(String serverIP, int port) {
+    public Client4(String serverIP, int port) {
         try {
             socket = new Socket(serverIP, port);
             inputStreamReader = new InputStreamReader(socket.getInputStream());
             bufferedReader = new BufferedReader(inputStreamReader);
             printWriter = new PrintWriter(socket.getOutputStream(), true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void start() {
+        try {
             BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("Who r u ?");
+            System.out.println("Who are you?");
             String clientName = userInput.readLine();
             printWriter.println(clientName);
 
@@ -32,7 +38,7 @@ public class Client2 {
                 }
 
                 String response = bufferedReader.readLine();
-                System.out.println("Server : " + response);
+                System.out.println("Server: " + response);
             }
 
             bufferedReader.close();
@@ -45,9 +51,15 @@ public class Client2 {
     }
 
     public static void main(String[] args) {
-        String serverIP = "localhost";
-        int port = 1000;
-        Client2 client = new Client2();
-        client.start(serverIP, port);
+        String[] serverIPs = {"localhost", "localhost", "localhost"};
+        int[] ports = {1111, 1112, 1113};
+
+        for (int i = 0; i < serverIPs.length; i++) {
+            String serverIP = serverIPs[i];
+            int port = ports[i];
+
+            Client4 client = new Client4(serverIP, port);
+            client.start();
+        }
     }
 }
